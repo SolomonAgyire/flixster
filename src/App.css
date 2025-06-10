@@ -26,3 +26,14 @@
     flex-direction: column;
   }
 }
+
+
+.app-container{
+  width: 100%;
+  min-width: 100vh;
+}
+
+.app-title{
+  text-align: center;
+  margin: 20px 0;
+}
