@@ -12,6 +12,10 @@ function MovieList() {
     const [activeView, setActiveView] = useState('nowPlaying');
     const [searchQuery, setSearchQuery] = useState('');
 
+    const filterMoviesWithPosters = (movieList) => {
+        return movieList.filter(movie => movie.poster_path !== null);
+    };
+
     const fetchMovies = async (pageNumber) => {
         try {
         setLoading(true);
@@ -22,15 +26,16 @@ function MovieList() {
             throw new Error("Failed to fetch movies");
         }
         const data = await response.json();
+        const filteredMovies = filterMoviesWithPosters(data.results);
         
         if (data.page >= data.total_pages) {
             setHasMore(false);
         }
 
         if (pageNumber === 1) {
-            setMovies(data.results);
+            setMovies(filteredMovies);
         } else {
-            setMovies(prevMovies => [...prevMovies, ...data.results]);
+            setMovies(prevMovies => [...prevMovies, ...filteredMovies]);
         }
         } catch (err) {
         setError(err.message);
@@ -51,7 +56,8 @@ function MovieList() {
             throw new Error("Failed to search movies");
         }
         const data = await response.json();
-        setMovies(data.results);
+        const filteredMovies = filterMoviesWithPosters(data.results);
+        setMovies(filteredMovies);
         setHasMore(false);
         } catch (err) {
         setError(err.message);
