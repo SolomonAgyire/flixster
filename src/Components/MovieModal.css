@@ -1,0 +1,205 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.modal-content {
+  background: #181818;
+  border-radius: 12px;
+  width: 600px;
+  height: 700px;
+  max-width: 90vw;
+  max-height: 90vh;
+  position: relative;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: #444 #181818;
+}
+
+.modal-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.modal-content::-webkit-scrollbar-track {
+  background: #181818;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+  background-color: #444;
+  border-radius: 4px;
+}
+
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(0, 0, 0, 0.6);
+  border: none;
+  color: white;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 3;
+  transition: all 0.3s ease;
+}
+
+.modal-close:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
+}
+
+.modal-backdrop {
+  width: 100%;
+  height: 400px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.modal-backdrop-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.2) 0%,
+    rgba(0, 0, 0, 0.6) 50%,
+    rgba(24, 24, 24, 0.95) 90%,
+    #181818 100%
+  );
+}
+
+.modal-details {
+  position: relative;
+  padding: 0 2rem 2rem;
+  color: white;
+  margin-top: -100px;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 1.5rem;
+}
+
+.modal-header h2 {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 2.8rem;
+  letter-spacing: 0.05em;
+  margin: 0;
+  color: white;
+  text-shadow: 0 4px 24px rgba(0, 0, 0, 0.7);
+  line-height: 1.1;
+}
+
+.modal-rating {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+}
+
+.modal-rating svg {
+  color: #f39c12;
+}
+
+.modal-meta {
+  display: flex;
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #bbb;
+}
+
+.meta-item svg {
+  color: #666;
+}
+
+.modal-genres {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1.5rem 0;
+}
+
+.genre-tag {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  color: #fff;
+  transition: all 0.3s ease;
+}
+
+.genre-tag:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-1px);
+}
+
+.modal-overview {
+  line-height: 1.6;
+  margin-top: 2rem;
+}
+
+.modal-overview h3 {
+  color: #999;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.modal-overview p {
+  margin: 0;
+  color: #ccc;
+}
+
+@media (max-width: 768px) {
+  .modal-content {
+    height: 600px;
+  }
+
+  .modal-backdrop {
+    height: 300px;
+  }
+
+  .modal-details {
+    padding: 0 1.5rem 1.5rem;
+    margin-top: -80px;
+  }
+
+  .modal-header h2 {
+    font-size: 2rem;
+  }
+
+  .modal-meta {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+}

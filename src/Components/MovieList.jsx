@@ -132,6 +132,7 @@ function MovieList() {
             title={movie.title}
             posterPath={movie.poster_path}
             voteAverage={movie.vote_average}
+            movie={movie}
           />
         ))}
       </div>
