@@ -31,23 +31,27 @@ function MovieList() {
     try {
       setLoading(true);
       const apiKey = import.meta.env.VITE_API_KEY;
-      let url = `https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}&language=en-US&page=${pageNumber}`;
+      let url = `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=en-US&page=${pageNumber}&sort_by=popularity.desc`;
 
       // Add genre filter if selected
       if (filterConfig.genres.length > 0) {
         url += `&with_genres=${filterConfig.genres.join(",")}`;
       }
 
+      // Add rating filter - TMDB uses vote_average for ratings
       if (filterConfig.minRating > 0) {
         url += `&vote_average.gte=${filterConfig.minRating}`;
       }
 
+      // Add year filters
       if (filterConfig.yearFrom) {
         url += `&primary_release_date.gte=${filterConfig.yearFrom}-01-01`;
       }
       if (filterConfig.yearTo) {
         url += `&primary_release_date.lte=${filterConfig.yearTo}-12-31`;
       }
+
+      console.log("Fetching movies with URL:", url); // For debugging
 
       const response = await fetch(url);
       if (!response.ok) {
@@ -81,9 +85,9 @@ function MovieList() {
     try {
       setLoading(true);
       const apiKey = import.meta.env.VITE_API_KEY;
-      let url = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${encodeURIComponent(
+      let url = `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=en-US&page=1&sort_by=popularity.desc&with_text_query=${encodeURIComponent(
         query
-      )}&page=1`;
+      )}`;
 
       // Add filters to search
       if (filterConfig.genres.length > 0) {
@@ -98,6 +102,8 @@ function MovieList() {
       if (filterConfig.yearTo) {
         url += `&primary_release_date.lte=${filterConfig.yearTo}-12-31`;
       }
+
+      console.log("Searching movies with URL:", url); // For debugging
 
       const response = await fetch(url);
       if (!response.ok) {

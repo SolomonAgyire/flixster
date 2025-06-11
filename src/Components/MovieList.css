@@ -2,9 +2,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 1rem;
+  padding: 0.5rem;
   width: 100%;
-  max-width: 1400px;
+  max-width: 100%;
   margin: 0 auto;
   position: relative;
   z-index: 1;
@@ -14,7 +14,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 1rem;
+  gap: 1.5rem;
   width: 100%;
   padding: 0.5rem;
 }
@@ -157,11 +157,11 @@
 
 @media (max-width: 480px) {
   .movie-container {
-    padding: 0.5rem;
+    padding: 0.25rem;
   }
 
   .movie-list {
-    gap: 0.5rem;
+    gap: 1rem;
   }
 
   .toggle-button {
@@ -173,216 +173,22 @@
 
 @media (min-width: 481px) and (max-width: 768px) {
   .movie-container {
-    padding: 0.75rem;
+    padding: 0.5rem;
   }
 
   .movie-list {
-    gap: 0.75rem;
+    gap: 1.25rem;
   }
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {
   .movie-container {
-    padding: 1rem;
-  }
-  .movie-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 1rem;
-    width: 100%;
-    max-width: 1800px;
-    margin: 0 auto;
-    position: relative;
-    z-index: 1;
-  }
-
-  .movie-list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1.5rem;
-    width: 100%;
-    padding: 0.5rem;
-  }
-
-  .load-more-container {
-    text-align: center;
-    margin: 1.25rem 0;
-    width: 100%;
-  }
-
-  .load-more-button {
-    background-color: transparent;
-    color: white;
-    border: 2px solid #f39c12;
-    padding: 0.75rem 1.5rem;
-    border-radius: 6px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .load-more-button::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: #f39c12;
-    transform: translateX(-100%);
-    transition: transform 0.3s ease;
-    z-index: -1;
-  }
-
-  .load-more-button:hover::before {
-    transform: translateX(0);
-  }
-
-  .load-more-button:hover {
-    color: white;
-  }
-
-  .loading {
-    color: #fff;
-    font-size: 1.125rem;
-    margin: 1.25rem 0;
-    text-align: center;
-    width: 100%;
-  }
-
-  .no-more {
-    color: #999;
-    font-size: 1rem;
-    text-align: center;
-    width: 100%;
-  }
-
-  .movie-error {
-    color: #e74c3c;
-    text-align: center;
-    padding: 1.25rem;
-    font-size: 1.125rem;
-    width: 100%;
-    background: rgba(231, 76, 60, 0.1);
-    border-radius: 4px;
-    backdrop-filter: blur(5px);
-  }
-
-  .no-results {
-    color: #fff;
-    font-size: 1.125rem;
-    text-align: center;
-    margin: 2.5rem 0;
-    width: 100%;
-  }
-
-  .view-toggle {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin-bottom: 2rem;
-    padding: 0 1rem;
-    width: 100%;
-    flex-wrap: wrap;
-  }
-
-  .toggle-button {
-    padding: 0.75rem 1.5rem;
-    font-size: 1rem;
-    font-weight: 600;
-    border: 2px solid #e50914;
-    border-radius: 4px;
-    background: transparent;
-    color: #e50914;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    flex: 1;
-    max-width: 200px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .toggle-button::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: #e50914;
-    transform: translateX(-100%);
-    transition: transform 0.3s ease;
-    z-index: -1;
-  }
-
-  .toggle-button:hover::before {
-    transform: translateX(0);
-  }
-
-  .toggle-button:hover {
-    color: white;
-  }
-
-  .toggle-button.active {
-    background: #e50914;
-    color: white;
-  }
-
-  .controls-container {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 2rem;
-    padding: 0 1rem;
-    width: 100%;
-    flex-wrap: wrap;
-  }
-
-  @media (max-width: 480px) {
-    .movie-container {
-      padding: 0.5rem;
-    }
-
-    .movie-list {
-      gap: 1rem;
-    }
-
-    .toggle-button {
-      width: 100%;
-      max-width: none;
-      margin: 0.25rem 0;
-    }
-  }
-
-  @media (min-width: 481px) and (max-width: 768px) {
-    .movie-container {
-      padding: 0.75rem;
-    }
-
-    .movie-list {
-      gap: 1.25rem;
-    }
-  }
-
-  @media (min-width: 769px) and (max-width: 1024px) {
-    .movie-container {
-      padding: 1rem;
-    }
-  }
-
-  @media (min-width: 1025px) {
-    .movie-container {
-      padding: 1.5rem;
-    }
+    padding: 0.75rem;
   }
 }
 
 @media (min-width: 1025px) {
   .movie-container {
-    padding: 1.5rem;
+    padding: 1rem;
   }
 }

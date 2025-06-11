@@ -15,7 +15,7 @@ const Footer = () => {
         <div className="footer-section">
           <div className="social-links">
             <a
-              href="https://linkedin.com/in/solomonagyire"
+              href="https://www.linkedin.com/in/solomon-agyire/"
               target="_blank"
               rel="noopener noreferrer"
               className="social-link"
@@ -31,7 +31,7 @@ const Footer = () => {
               <FaInstagram />
             </a>
             <a
-              href="https://facebook.com/solomonagyire"
+              href="https://www.facebook.com/TheRealKingSolomon1"
               target="_blank"
               rel="noopener noreferrer"
               className="social-link"
