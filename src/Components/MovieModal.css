@@ -19,7 +19,7 @@
   background: #181818;
   border-radius: 12px;
   width: 600px;
-  height: 700px;
+  height: 580px;
   max-width: 90vw;
   max-height: 90vh;
   position: relative;
@@ -28,6 +28,8 @@
   overflow-x: hidden;
   scrollbar-width: thin;
   scrollbar-color: #444 #181818;
+  margin-top: 0px;
+  margin-bottom: 10px;
 }
 
 .modal-content::-webkit-scrollbar {
