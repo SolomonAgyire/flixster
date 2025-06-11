@@ -54,7 +54,7 @@ function MovieList() {
         throw new Error("Failed to fetch movies");
       }
       const data = await response.json();
-      let filteredMovies = data.results;
+      let filteredMovies = filterMoviesWithPosters(data.results);
 
       // Apply sorting
       filteredMovies = sortMovies(filteredMovies, sortConfig);
@@ -104,7 +104,7 @@ function MovieList() {
         throw new Error("Failed to search movies");
       }
       const data = await response.json();
-      let filteredMovies = data.results;
+      let filteredMovies = filterMoviesWithPosters(data.results);
 
       // Apply sorting
       filteredMovies = sortMovies(filteredMovies, sortConfig);
