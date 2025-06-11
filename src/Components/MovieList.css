@@ -145,6 +145,16 @@
   color: white;
 }
 
+.controls-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding: 0 1rem;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
 @media (max-width: 480px) {
   .movie-container {
     padding: 0.5rem;

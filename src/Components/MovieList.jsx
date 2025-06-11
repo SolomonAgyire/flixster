@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import MovieCard from "./MovieCard";
 import SearchBar from "./SearchBar";
+import FilterControls from "./FilterControls";
 import "./MovieList.css";
 
 function MovieList() {
@@ -11,6 +12,16 @@ function MovieList() {
   const [hasMore, setHasMore] = useState(true);
   const [activeView, setActiveView] = useState("nowPlaying");
   const [searchQuery, setSearchQuery] = useState("");
+  const [sortConfig, setSortConfig] = useState({
+    field: "title",
+    order: "asc",
+  });
+  const [filterConfig, setFilterConfig] = useState({
+    genres: [],
+    minRating: 0,
+    yearFrom: "",
+    yearTo: "",
+  });
 
   const filterMoviesWithPosters = (movieList) => {
     return movieList.filter((movie) => movie.poster_path !== null);
@@ -20,13 +31,33 @@ function MovieList() {
     try {
       setLoading(true);
       const apiKey = import.meta.env.VITE_API_KEY;
-      const url = `https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}&language=en-US&page=${pageNumber}`;
+      let url = `https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}&language=en-US&page=${pageNumber}`;
+
+      // Add genre filter if selected
+      if (filterConfig.genres.length > 0) {
+        url += `&with_genres=${filterConfig.genres.join(",")}`;
+      }
+
+      if (filterConfig.minRating > 0) {
+        url += `&vote_average.gte=${filterConfig.minRating}`;
+      }
+
+      if (filterConfig.yearFrom) {
+        url += `&primary_release_date.gte=${filterConfig.yearFrom}-01-01`;
+      }
+      if (filterConfig.yearTo) {
+        url += `&primary_release_date.lte=${filterConfig.yearTo}-12-31`;
+      }
+
       const response = await fetch(url);
       if (!response.ok) {
         throw new Error("Failed to fetch movies");
       }
       const data = await response.json();
-      const filteredMovies = filterMoviesWithPosters(data.results);
+      let filteredMovies = data.results;
+
+      // Apply sorting
+      filteredMovies = sortMovies(filteredMovies, sortConfig);
 
       if (data.page >= data.total_pages) {
         setHasMore(false);
@@ -50,15 +81,34 @@ function MovieList() {
     try {
       setLoading(true);
       const apiKey = import.meta.env.VITE_API_KEY;
-      const url = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${encodeURIComponent(
+      let url = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${encodeURIComponent(
         query
       )}&page=1`;
+
+      // Add filters to search
+      if (filterConfig.genres.length > 0) {
+        url += `&with_genres=${filterConfig.genres.join(",")}`;
+      }
+      if (filterConfig.minRating > 0) {
+        url += `&vote_average.gte=${filterConfig.minRating}`;
+      }
+      if (filterConfig.yearFrom) {
+        url += `&primary_release_date.gte=${filterConfig.yearFrom}-01-01`;
+      }
+      if (filterConfig.yearTo) {
+        url += `&primary_release_date.lte=${filterConfig.yearTo}-12-31`;
+      }
+
       const response = await fetch(url);
       if (!response.ok) {
         throw new Error("Failed to search movies");
       }
       const data = await response.json();
-      const filteredMovies = filterMoviesWithPosters(data.results);
+      let filteredMovies = data.results;
+
+      // Apply sorting
+      filteredMovies = sortMovies(filteredMovies, sortConfig);
+
       setMovies(filteredMovies);
       setHasMore(false);
     } catch (err) {
@@ -66,6 +116,25 @@ function MovieList() {
     } finally {
       setLoading(false);
     }
+  };
+
+  const sortMovies = (movieList, { field, order }) => {
+    return [...movieList].sort((a, b) => {
+      let valueA = a[field];
+      let valueB = b[field];
+
+      // Handle special cases
+      if (field === "release_date") {
+        valueA = new Date(valueA || "").getTime();
+        valueB = new Date(valueB || "").getTime();
+      }
+
+      if (order === "asc") {
+        return valueA > valueB ? 1 : -1;
+      } else {
+        return valueA < valueB ? 1 : -1;
+      }
+    });
   };
 
   useEffect(() => {
@@ -76,7 +145,7 @@ function MovieList() {
     } else if (searchQuery) {
       searchMovies(searchQuery);
     }
-  }, [activeView]);
+  }, [activeView, sortConfig, filterConfig]);
 
   const handleLoadMore = () => {
     const nextPage = page + 1;
@@ -92,6 +161,14 @@ function MovieList() {
 
   const handleViewChange = (view) => {
     setActiveView(view);
+  };
+
+  const handleSortChange = (sortValue) => {
+    setSortConfig(sortValue);
+  };
+
+  const handleFilterChange = (filters) => {
+    setFilterConfig(filters);
   };
 
   if (error) {
@@ -117,7 +194,13 @@ function MovieList() {
         </button>
       </div>
 
-      {activeView === "search" && <SearchBar onSearch={handleSearch} />}
+      <div className="controls-container">
+        {activeView === "search" && <SearchBar onSearch={handleSearch} />}
+        <FilterControls
+          onSortChange={handleSortChange}
+          onFilterChange={handleFilterChange}
+        />
+      </div>
 
       {loading && <div className="loading">Loading movies...</div>}
 
