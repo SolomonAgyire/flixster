@@ -70,7 +70,9 @@ function MovieList() {
       if (pageNumber === 1) {
         setMovies(filteredMovies);
       } else {
-        setMovies((prevMovies) => [...prevMovies, ...filteredMovies]);
+        // Sort only the new movies before appending them
+        const sortedNewMovies = sortMovies(filteredMovies, sortConfig);
+        setMovies((prevMovies) => [...prevMovies, ...sortedNewMovies]);
       }
     } catch (err) {
       setError(err.message);
