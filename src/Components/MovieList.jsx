@@ -88,7 +88,7 @@ function MovieList() {
     try {
       setLoading(true);
       const apiKey = import.meta.env.VITE_API_KEY;
-      let url = `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=en-US&page=1&sort_by=popularity.desc&with_text_query=${encodeURIComponent(
+      let url = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&page=1&query=${encodeURIComponent(
         query
       )}`;
 
