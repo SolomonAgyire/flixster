@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaStar, FaHeart } from "react-icons/fa";
+import { FaStar, FaHeart, FaEye } from "react-icons/fa";
 import MovieModal from "./MovieModal";
 import "./MovieCard.css";
 
@@ -10,6 +10,8 @@ function MovieCard({
   movie,
   isFavorite,
   onToggleFavorite,
+  isWatched,
+  onToggleWatched,
 }) {
   const [showModal, setShowModal] = useState(false);
   const [movieDetails, setMovieDetails] = useState(null);
@@ -41,20 +43,34 @@ function MovieCard({
     onToggleFavorite();
   };
 
+  const handleWatchedClick = (e) => {
+    e.stopPropagation();
+    onToggleWatched();
+  };
+
   return (
     <>
       <div className="movie-card" onClick={handleClick}>
         <div className="movie-poster">
           <img src={posterUrl} alt={`${title} poster`} />
-          <button
-            className={`favorite-button ${isFavorite ? "active" : ""}`}
-            onClick={handleFavoriteClick}
-            aria-label={
-              isFavorite ? "Remove from favorites" : "Add to favorites"
-            }
-          >
-            <FaHeart />
-          </button>
+          <div className="movie-actions">
+            <button
+              className={`favorite-button ${isFavorite ? "active" : ""}`}
+              onClick={handleFavoriteClick}
+              aria-label={
+                isFavorite ? "Remove from favorites" : "Add to favorites"
+              }
+            >
+              <FaHeart />
+            </button>
+            <button
+              className={`watched-button ${isWatched ? "active" : ""}`}
+              onClick={handleWatchedClick}
+              aria-label={isWatched ? "Mark as unwatched" : "Mark as watched"}
+            >
+              <FaEye />
+            </button>
+          </div>
         </div>
         <div className="movie-info">
           <h3>{title}</h3>

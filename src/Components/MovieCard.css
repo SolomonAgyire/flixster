@@ -95,10 +95,17 @@
   fill: #f39c12;
 }
 
-.favorite-button {
+.movie-actions {
   position: absolute;
   top: 1rem;
   right: 1rem;
+  display: flex;
+  gap: 0.5rem;
+  z-index: 3;
+}
+
+.favorite-button,
+.watched-button {
   background: rgba(0, 0, 0, 0.6);
   border: none;
   color: white;
@@ -109,20 +116,22 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  z-index: 3;
   transition: all 0.3s ease;
 }
 
-.movie-card:hover .favorite-button {
+.movie-card:hover .favorite-button,
+.movie-card:hover .watched-button {
   transform: scale(1.1);
 }
 
-.favorite-button:hover {
-  background: rgba(255, 255, 255, 0.2);
+.favorite-button:hover,
+.watched-button:hover {
+  background: rgba(52, 152, 219, 0.8);
   transform: scale(1.1);
 }
 
-.favorite-button svg {
+.favorite-button svg,
+.watched-button svg {
   width: 1.25rem;
   height: 1.25rem;
   fill: white;
@@ -133,8 +142,16 @@
   fill: #e50914;
 }
 
+.watched-button.active svg {
+  fill: #2ecc71;
+}
+
 .favorite-button.active:hover {
-  background: rgba(229, 9, 20, 0.2);
+  background: rgba(229, 9, 20, 0.8);
+}
+
+.watched-button.active:hover {
+  background: rgba(46, 204, 113, 0.8);
 }
 
 @media (max-width: 480px) {

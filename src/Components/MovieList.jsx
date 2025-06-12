@@ -13,6 +13,7 @@ function MovieList() {
   const [activeView, setActiveView] = useState("nowPlaying");
   const [searchQuery, setSearchQuery] = useState("");
   const [favorites, setFavorites] = useState(new Set());
+  const [watched, setWatched] = useState(new Set());
   const [sortConfig, setSortConfig] = useState({
     field: "title",
     order: "asc",
@@ -192,6 +193,18 @@ function MovieList() {
     });
   };
 
+  const handleToggleWatched = (movieId) => {
+    setWatched((prev) => {
+      const newWatched = new Set(prev);
+      if (newWatched.has(movieId)) {
+        newWatched.delete(movieId);
+      } else {
+        newWatched.add(movieId);
+      }
+      return newWatched;
+    });
+  };
+
   if (error) {
     return <div className="movie-error">Error: {error}</div>;
   }
@@ -239,6 +252,8 @@ function MovieList() {
             movie={movie}
             isFavorite={favorites.has(movie.id)}
             onToggleFavorite={() => handleToggleFavorite(movie.id)}
+            isWatched={watched.has(movie.id)}
+            onToggleWatched={() => handleToggleWatched(movie.id)}
           />
         ))}
       </div>
