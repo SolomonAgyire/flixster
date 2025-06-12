@@ -12,6 +12,7 @@ function MovieList() {
   const [hasMore, setHasMore] = useState(true);
   const [activeView, setActiveView] = useState("nowPlaying");
   const [searchQuery, setSearchQuery] = useState("");
+  const [favorites, setFavorites] = useState(new Set());
   const [sortConfig, setSortConfig] = useState({
     field: "title",
     order: "asc",
@@ -179,6 +180,18 @@ function MovieList() {
     setFilterConfig(filters);
   };
 
+  const handleToggleFavorite = (movieId) => {
+    setFavorites((prev) => {
+      const newFavorites = new Set(prev);
+      if (newFavorites.has(movieId)) {
+        newFavorites.delete(movieId);
+      } else {
+        newFavorites.add(movieId);
+      }
+      return newFavorites;
+    });
+  };
+
   if (error) {
     return <div className="movie-error">Error: {error}</div>;
   }
@@ -224,6 +237,8 @@ function MovieList() {
             posterPath={movie.poster_path}
             voteAverage={movie.vote_average}
             movie={movie}
+            isFavorite={favorites.has(movie.id)}
+            onToggleFavorite={() => handleToggleFavorite(movie.id)}
           />
         ))}
       </div>

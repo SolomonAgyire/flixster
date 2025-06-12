@@ -1,9 +1,16 @@
 import React, { useState } from "react";
-import { FaStar } from "react-icons/fa";
+import { FaStar, FaHeart } from "react-icons/fa";
 import MovieModal from "./MovieModal";
 import "./MovieCard.css";
 
-function MovieCard({ title, posterPath, voteAverage, movie }) {
+function MovieCard({
+  title,
+  posterPath,
+  voteAverage,
+  movie,
+  isFavorite,
+  onToggleFavorite,
+}) {
   const [showModal, setShowModal] = useState(false);
   const [movieDetails, setMovieDetails] = useState(null);
 
@@ -29,10 +36,26 @@ function MovieCard({ title, posterPath, voteAverage, movie }) {
     }
   };
 
+  const handleFavoriteClick = (e) => {
+    e.stopPropagation();
+    onToggleFavorite();
+  };
+
   return (
     <>
       <div className="movie-card" onClick={handleClick}>
-        <img src={posterUrl} alt={`${title} poster`} />
+        <div className="movie-poster">
+          <img src={posterUrl} alt={`${title} poster`} />
+          <button
+            className={`favorite-button ${isFavorite ? "active" : ""}`}
+            onClick={handleFavoriteClick}
+            aria-label={
+              isFavorite ? "Remove from favorites" : "Add to favorites"
+            }
+          >
+            <FaHeart />
+          </button>
+        </div>
         <div className="movie-info">
           <h3>{title}</h3>
           <p>
