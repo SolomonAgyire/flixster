@@ -4,14 +4,12 @@ import SearchBar from "./SearchBar";
 import FilterControls from "./FilterControls";
 import "./MovieList.css";
 
-function MovieList() {
+function MovieList({ activeView, onViewChange, searchQuery }) {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
-  const [activeView, setActiveView] = useState("nowPlaying");
-  const [searchQuery, setSearchQuery] = useState("");
   const [favorites, setFavorites] = useState(new Set());
   const [watched, setWatched] = useState(new Set());
   const [sortConfig, setSortConfig] = useState({
@@ -155,22 +153,12 @@ function MovieList() {
     } else if (searchQuery) {
       searchMovies(searchQuery);
     }
-  }, [activeView, sortConfig, filterConfig]);
+  }, [activeView, searchQuery, sortConfig, filterConfig]);
 
   const handleLoadMore = () => {
     const nextPage = page + 1;
     setPage(nextPage);
     fetchMovies(nextPage);
-  };
-
-  const handleSearch = (query) => {
-    setSearchQuery(query);
-    setActiveView("search");
-    searchMovies(query);
-  };
-
-  const handleViewChange = (view) => {
-    setActiveView(view);
   };
 
   const handleSortChange = (sortValue) => {
@@ -211,25 +199,7 @@ function MovieList() {
 
   return (
     <div className="movie-container">
-      <div className="view-toggle">
-        <button
-          className={`toggle-button ${
-            activeView === "nowPlaying" ? "active" : ""
-          }`}
-          onClick={() => handleViewChange("nowPlaying")}
-        >
-          Now Playing
-        </button>
-        <button
-          className={`toggle-button ${activeView === "search" ? "active" : ""}`}
-          onClick={() => handleViewChange("search")}
-        >
-          Search
-        </button>
-      </div>
-
       <div className="controls-container">
-        {activeView === "search" && <SearchBar onSearch={handleSearch} />}
         <FilterControls
           onSortChange={handleSortChange}
           onFilterChange={handleFilterChange}

@@ -12,7 +12,7 @@
 
 .main-content {
   flex: 1;
-  padding: 6rem 2rem 2rem;
+  padding: 8rem 2rem 2rem;
   max-width: 1200px;
   margin: 0 auto;
   width: 100%;
@@ -28,7 +28,7 @@
 
 @media (max-width: 768px) {
   .main-content {
-    padding: 5rem 1rem 1rem;
+    padding: 7rem 1rem 1rem;
   }
 
   .app-title {

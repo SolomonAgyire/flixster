@@ -4,28 +4,132 @@
   left: 0;
   right: 0;
   z-index: 1000;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
 }
 
 .header-content {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 1rem 2rem;
+  padding: 0.75rem 2rem;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 }
 
 .logo {
-  font-size: 2rem;
+  font-size: 1.75rem;
   font-weight: 700;
   color: #ffffff;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin: 0;
+}
+
+.header-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: flex-end;
+}
+
+.view-toggle {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.header-search-container {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  margin-top: -0.25rem;
+}
+
+.header-search {
+  flex: 1;
+  min-width: 0;
+}
+
+.cancel-search-button {
+  background: transparent;
+  border: 2px solid #e50914;
+  color: #e50914;
+  padding: 0.75rem 1.25rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  height: 100%;
+  min-height: 42px;
+  position: relative;
+  overflow: hidden;
+}
+
+.cancel-search-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #e50914;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  z-index: -1;
+}
+
+.cancel-search-button:hover {
+  color: white;
+  transform: scale(1.05);
+}
+
+.cancel-search-button:hover::before {
+  transform: translateX(0);
+}
+
+.toggle-button {
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border: 2px solid #e50914;
+  border-radius: 4px;
+  background: transparent;
+  color: #e50914;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.toggle-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #e50914;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  z-index: -1;
+}
+
+.toggle-button:hover::before {
+  transform: translateX(0);
+}
+
+.toggle-button:hover {
+  color: white;
+}
+
+.toggle-button.active {
+  background: #e50914;
+  color: white;
 }
 
 .nav-links {
@@ -50,11 +154,44 @@
 
 @media (max-width: 768px) {
   .header-content {
-    padding: 1rem;
+    padding: 0.75rem 1rem;
+    flex-direction: column;
+    gap: 0.75rem;
   }
 
   .logo {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
+  }
+
+  .header-controls {
+    width: 100%;
+    align-items: center;
+  }
+
+  .view-toggle {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .header-search-container {
+    width: 100%;
+  }
+
+  .header-search {
+    width: 100%;
+  }
+
+  .cancel-search-button {
+    padding: 0.6rem 1rem;
+    font-size: 0.85rem;
+    min-height: 38px;
+  }
+
+  .toggle-button {
+    flex: 1;
+    max-width: 150px;
+    font-size: 0.85rem;
+    padding: 0.4rem 0.75rem;
   }
 
   .nav-links {
