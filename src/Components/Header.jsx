@@ -2,12 +2,18 @@ import React from "react";
 import { FaTimes } from "react-icons/fa";
 import SearchBar from "./SearchBar";
 import "./Header.css";
+import logoImg from "../assets/img/logo.jpg";
 
 const Header = ({ activeView, onViewChange, onSearch }) => {
   return (
     <header className="header">
       <div className="header-content">
-        <h1 className="logo">Flixster</h1>
+        <div className="logo-container">
+          <img src={logoImg} alt="Movie Magic Logo" className="logo-img" />
+        </div>
+        <div className="header-title">
+          <span className="movies-playing-title">Movies Playing</span>
+        </div>
         <div className="header-controls">
           <div className="view-toggle">
             <button

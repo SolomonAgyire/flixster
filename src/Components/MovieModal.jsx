@@ -1,5 +1,6 @@
 import React from "react";
 import { FaStar, FaTimes, FaClock, FaCalendarAlt } from "react-icons/fa";
+import MovieTrailer from "./MovieTrailer";
 import "./MovieModal.css";
 
 function MovieModal({ movie, onClose }) {
@@ -77,6 +78,8 @@ function MovieModal({ movie, onClose }) {
               <p>{movie.overview}</p>
             </div>
           )}
+
+          <MovieTrailer movie={movie} />
         </div>
       </div>
     </div>
