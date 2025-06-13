@@ -1,15 +1,22 @@
 import React from "react";
-import { FaTimes } from "react-icons/fa";
+import { FaTimes, FaBars } from "react-icons/fa";
 import SearchBar from "./SearchBar";
 import "./Header.css";
 import logoImg from "../assets/img/logo.jpg";
 
-const Header = ({ activeView, onViewChange, onSearch }) => {
+const Header = ({ activeView, onViewChange, onSearch, onSidebarToggle }) => {
   return (
     <header className="header">
       <div className="header-content">
         <div className="logo-container">
           <img src={logoImg} alt="Movie Magic Logo" className="logo-img" />
+          <button
+            className="sidebar-toggle-btn"
+            onClick={onSidebarToggle}
+            aria-label="Open sidebar"
+          >
+            <FaBars />
+          </button>
         </div>
         <div className="header-title">
           <span className="movies-playing-title">Movies Playing</span>

@@ -264,6 +264,13 @@
     min-height: 32px;
     border-radius: 8px;
   }
+
+  .sidebar-toggle-btn {
+    width: 28px;
+    height: 28px;
+    font-size: 1rem;
+    margin-top: 0.15rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -282,7 +289,30 @@
   }
 }
 
-/* Remove old .logo styles if not needed */
 .logo {
   display: none;
+}
+
+.sidebar-toggle-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0.3rem auto 0 auto;
+  background: #222;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  font-size: 1.2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, transform 0.2s;
+  outline: none;
+}
+.sidebar-toggle-btn:hover,
+.sidebar-toggle-btn:focus {
+  background: #e50914;
+  color: #fff;
+  transform: scale(1.08);
 }

@@ -105,7 +105,7 @@ function MovieList({ activeView, onViewChange, searchQuery }) {
         url += `&primary_release_date.lte=${filterConfig.yearTo}-12-31`;
       }
 
-      console.log("Searching movies with URL:", url); // For debugging
+      console.log("Searching movies with URL:", url);
 
       const response = await fetch(url);
       if (!response.ok) {
@@ -193,6 +193,14 @@ function MovieList({ activeView, onViewChange, searchQuery }) {
     });
   };
 
+  // Filtered movies for favorites/watched views
+  let displayedMovies = movies;
+  if (activeView === "favorites") {
+    displayedMovies = movies.filter((movie) => favorites.has(movie.id));
+  } else if (activeView === "watched") {
+    displayedMovies = movies.filter((movie) => watched.has(movie.id));
+  }
+
   if (error) {
     return <div className="movie-error">Error: {error}</div>;
   }
@@ -208,12 +216,12 @@ function MovieList({ activeView, onViewChange, searchQuery }) {
 
       {loading && <div className="loading">Loading movies...</div>}
 
-      {!loading && movies.length === 0 && (
+      {!loading && displayedMovies.length === 0 && (
         <div className="no-results">No movies found</div>
       )}
 
       <div className="movie-list">
-        {movies.map((movie) => (
+        {displayedMovies.map((movie) => (
           <MovieCard
             key={movie.id}
             title={movie.title}
