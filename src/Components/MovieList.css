@@ -2,10 +2,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0.5rem;
+  padding: 0 0.5rem;
   width: 100%;
   max-width: 100%;
-  margin: 0 auto;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0;
   position: relative;
   z-index: 1;
 }
@@ -160,11 +162,30 @@
 
 @media (max-width: 480px) {
   .movie-container {
-    padding: 0.25rem;
+    margin-top: 0;
+    padding: 0 0.1rem;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    box-sizing: border-box;
   }
 
   .movie-list {
     gap: 1rem;
+    padding: 0.5rem 1rem;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .movie-list-container {
+    padding: 0.5rem 1rem;
+    width: 100%;
+    margin: 1rem auto;
+  }
+
+  .movie-card {
+    max-width: calc(50% - 1rem);
+    margin: 0 auto;
   }
 
   .toggle-button {
@@ -217,6 +238,11 @@
 @media (max-width: 768px) {
   .movie-list-container {
     padding: 0.2rem 0 0.5rem 0;
+  }
+
+  .movie-container {
+    margin-top: 0;
+    padding: 0 0.25rem;
   }
 }
 

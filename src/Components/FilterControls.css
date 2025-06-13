@@ -165,21 +165,41 @@ input[type="range"] + span {
 
 @media (max-width: 768px) {
   .filter-controls {
-    flex-direction: column;
+    flex-direction: row;
+    gap: 0.2rem;
+    margin-bottom: 0;
   }
 
-  .dropdown-menu {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 90%;
-    max-width: 350px;
-    max-height: 80vh;
-    overflow-y: auto;
+  .filter-menu {
+    min-width: 250px;
+    padding: 0.8rem;
+  }
+
+  .filter-section {
+    margin-bottom: 1rem;
   }
 
   .genre-grid {
-    grid-template-columns: 1fr;
+    max-height: 150px;
+  }
+}
+
+@media (max-width: 480px) {
+  .filter-controls {
+    flex-direction: row;
+    gap: 0.2rem;
+  }
+
+  .filter-menu {
+    min-width: 200px;
+    padding: 0.6rem;
+  }
+
+  .filter-section {
+    margin-bottom: 0.8rem;
+  }
+
+  .genre-grid {
+    max-height: 120px;
   }
 }

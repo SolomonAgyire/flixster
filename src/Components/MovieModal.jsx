@@ -78,7 +78,6 @@ function MovieModal({ movie, onClose }) {
               <p>{movie.overview}</p>
             </div>
           )}
-
           <MovieTrailer movie={movie} />
         </div>
       </div>
