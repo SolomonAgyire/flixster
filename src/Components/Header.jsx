@@ -8,51 +8,55 @@ const Header = ({ activeView, onViewChange, onSearch, onSidebarToggle }) => {
   return (
     <header className="header">
       <div className="header-content">
-        <div className="logo-container">
-          <img src={logoImg} alt="Movie Magic Logo" className="logo-img" />
-          <button
-            className="sidebar-toggle-btn"
-            onClick={onSidebarToggle}
-            aria-label="Open sidebar"
-          >
-            <FaBars />
-          </button>
+        <div className="header-left">
+          <div className="logo-container">
+            <img src={logoImg} alt="Movie Magic Logo" className="logo-img" />
+            <button
+              className="sidebar-toggle-btn"
+              onClick={onSidebarToggle}
+              aria-label="Open sidebar"
+            >
+              <FaBars />
+            </button>
+          </div>
         </div>
         <div className="header-title">
           <span className="movies-playing-title">Movies Playing</span>
         </div>
-        <div className="header-controls">
-          <div className="view-toggle">
-            <button
-              className={`toggle-button ${
-                activeView === "nowPlaying" ? "active" : ""
-              }`}
-              onClick={() => onViewChange("nowPlaying")}
-            >
-              Now Playing
-            </button>
-            <button
-              className={`toggle-button ${
-                activeView === "search" ? "active" : ""
-              }`}
-              onClick={() => onViewChange("search")}
-            >
-              Search
-            </button>
-          </div>
-          {activeView === "search" && (
-            <div className="header-search-container">
-              <div className="header-search">
-                <SearchBar onSearch={onSearch} />
-              </div>
+        <div className="header-right">
+          <div className="header-controls">
+            <div className="view-toggle">
               <button
-                className="cancel-search-button"
+                className={`toggle-button ${
+                  activeView === "nowPlaying" ? "active" : ""
+                }`}
                 onClick={() => onViewChange("nowPlaying")}
               >
-                Cancel
+                Now Playing
+              </button>
+              <button
+                className={`toggle-button ${
+                  activeView === "search" ? "active" : ""
+                }`}
+                onClick={() => onViewChange("search")}
+              >
+                Search
               </button>
             </div>
-          )}
+            {activeView === "search" && (
+              <div className="header-search-container">
+                <div className="header-search">
+                  <SearchBar onSearch={onSearch} />
+                </div>
+                <button
+                  className="cancel-search-button"
+                  onClick={() => onViewChange("nowPlaying")}
+                >
+                  Cancel
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </header>

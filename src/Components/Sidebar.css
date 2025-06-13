@@ -95,3 +95,33 @@
     padding: 0.6rem 0.7rem;
   }
 }
+
+@media (max-width: 768px) {
+  .sidebar {
+    left: -80vw;
+    width: 80vw;
+    min-width: 180px;
+    max-width: 320px;
+    padding: 1rem 0.7rem 1rem 0.7rem;
+  }
+  .sidebar.open {
+    left: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar-toggle-btn {
+    position: absolute;
+    left: 0.5rem;
+    top: 52px;
+    margin: 0;
+    z-index: 1300;
+  }
+  .logo-container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+}

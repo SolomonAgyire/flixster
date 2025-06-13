@@ -14,14 +14,15 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 1.5rem;
+  gap: 0.5rem;
   width: 100%;
-  padding: 0.5rem;
+  padding: 0;
+  margin: 0;
 }
 
 .load-more-container {
   text-align: center;
-  margin: 1.25rem 0;
+  margin: 0.1rem 0 0 0;
   width: 100%;
 }
 
@@ -29,13 +30,15 @@
   background-color: transparent;
   color: white;
   border: 2px solid #f39c12;
-  padding: 0.75rem 1.5rem;
+  padding: 1.5rem 1.5rem 0.75rem 1.5rem;
   border-radius: 6px;
   font-size: 1rem;
   cursor: pointer;
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  margin-top: 1.2rem;
+  margin-bottom: 0;
 }
 
 .load-more-button::before {
@@ -190,5 +193,35 @@
 @media (min-width: 1025px) {
   .movie-container {
     padding: 1rem;
+  }
+}
+
+.movie-list-container {
+  width: 100vw;
+  min-height: 70vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0;
+  background: #181818;
+  box-sizing: border-box;
+  margin: 0;
+}
+
+.movie-list {
+  width: 100vw;
+  padding: 0;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .movie-list-container {
+    padding: 0.2rem 0 0.5rem 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .movie-list-container {
+    padding: 0.1rem 0 0.3rem 0;
   }
 }
