@@ -15,7 +15,7 @@ function SearchBar({ onSearch }) {
 
   const handleCancel = () => {
     setSearchQuery("");
-    onSearch(""); // This will trigger a reset of the search results
+    onSearch("");
   };
 
   return (

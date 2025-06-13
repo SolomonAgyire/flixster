@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from "react";
 import MovieCard from "./MovieCard";
 import SearchBar from "./SearchBar";
-import FilterControls from "./FilterControls";
 import "./MovieList.css";
 
-function MovieList({ activeView, onViewChange, searchQuery }) {
+function MovieList({
+  activeView,
+  onViewChange,
+  searchQuery,
+  sortConfig,
+  filterConfig,
+}) {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -12,16 +17,6 @@ function MovieList({ activeView, onViewChange, searchQuery }) {
   const [hasMore, setHasMore] = useState(true);
   const [favorites, setFavorites] = useState(new Set());
   const [watched, setWatched] = useState(new Set());
-  const [sortConfig, setSortConfig] = useState({
-    field: "title",
-    order: "asc",
-  });
-  const [filterConfig, setFilterConfig] = useState({
-    genres: [],
-    minRating: 0,
-    yearFrom: "",
-    yearTo: "",
-  });
 
   const filterMoviesWithPosters = (movieList) => {
     return movieList.filter((movie) => movie.poster_path !== null);
@@ -38,7 +33,6 @@ function MovieList({ activeView, onViewChange, searchQuery }) {
         url += `&with_genres=${filterConfig.genres.join(",")}`;
       }
 
-      // Add rating filter - TMDB uses vote_average for ratings
       if (filterConfig.minRating > 0) {
         url += `&vote_average.gte=${filterConfig.minRating}`;
       }
@@ -51,7 +45,7 @@ function MovieList({ activeView, onViewChange, searchQuery }) {
         url += `&primary_release_date.lte=${filterConfig.yearTo}-12-31`;
       }
 
-      console.log("Fetching movies with URL:", url); // For debugging
+      console.log("Fetching movies with URL:", url);
 
       const response = await fetch(url);
       if (!response.ok) {
@@ -70,7 +64,6 @@ function MovieList({ activeView, onViewChange, searchQuery }) {
       if (pageNumber === 1) {
         setMovies(filteredMovies);
       } else {
-        // Sort only the new movies before appending them
         const sortedNewMovies = sortMovies(filteredMovies, sortConfig);
         setMovies((prevMovies) => [...prevMovies, ...sortedNewMovies]);
       }
@@ -161,14 +154,6 @@ function MovieList({ activeView, onViewChange, searchQuery }) {
     fetchMovies(nextPage);
   };
 
-  const handleSortChange = (sortValue) => {
-    setSortConfig(sortValue);
-  };
-
-  const handleFilterChange = (filters) => {
-    setFilterConfig(filters);
-  };
-
   const handleToggleFavorite = (movieId) => {
     setFavorites((prev) => {
       const newFavorites = new Set(prev);
@@ -193,7 +178,6 @@ function MovieList({ activeView, onViewChange, searchQuery }) {
     });
   };
 
-  // Filtered movies for favorites/watched views
   let displayedMovies = movies;
   if (activeView === "favorites") {
     displayedMovies = movies.filter((movie) => favorites.has(movie.id));
@@ -207,13 +191,6 @@ function MovieList({ activeView, onViewChange, searchQuery }) {
 
   return (
     <div className="movie-container">
-      <div className="controls-container">
-        <FilterControls
-          onSortChange={handleSortChange}
-          onFilterChange={handleFilterChange}
-        />
-      </div>
-
       {loading && <div className="loading">Loading movies...</div>}
 
       {!loading && displayedMovies.length === 0 && (

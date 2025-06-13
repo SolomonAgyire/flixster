@@ -26,26 +26,23 @@ function MovieCard({
   const handleClick = async () => {
     try {
       const apiKey = import.meta.env.VITE_API_KEY;
-      // Fetch movie details
+
       const movieResponse = await fetch(
         `https://api.themoviedb.org/3/movie/${movie.id}?api_key=${apiKey}&language=en-US`
       );
       if (!movieResponse.ok) throw new Error("Failed to fetch movie details");
       const movieData = await movieResponse.json();
 
-      // Fetch movie videos (trailers)
       const videosResponse = await fetch(
         `https://api.themoviedb.org/3/movie/${movie.id}/videos?api_key=${apiKey}&language=en-US`
       );
       if (!videosResponse.ok) throw new Error("Failed to fetch movie videos");
       const videosData = await videosResponse.json();
 
-      // Find the first official trailer
       const trailer = videosData.results.find(
         (video) => video.type === "Trailer" && video.site === "YouTube"
       );
 
-      // Combine movie details with trailer key
       const combinedData = {
         ...movieData,
         trailerKey: trailer ? trailer.key : null,

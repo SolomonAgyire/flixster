@@ -1,10 +1,18 @@
 import React from "react";
 import { FaTimes, FaBars } from "react-icons/fa";
 import SearchBar from "./SearchBar";
+import FilterControls from "./FilterControls";
 import "./Header.css";
 import logoImg from "../assets/img/logo.jpg";
 
-const Header = ({ activeView, onViewChange, onSearch, onSidebarToggle }) => {
+const Header = ({
+  activeView,
+  onViewChange,
+  onSearch,
+  onSidebarToggle,
+  onSortChange,
+  onFilterChange,
+}) => {
   return (
     <header className="header">
       <div className="header-content">
@@ -18,6 +26,12 @@ const Header = ({ activeView, onViewChange, onSearch, onSidebarToggle }) => {
             >
               <FaBars />
             </button>
+          </div>
+          <div className="header-filters">
+            <FilterControls
+              onSortChange={onSortChange}
+              onFilterChange={onFilterChange}
+            />
           </div>
         </div>
         <div className="header-title">

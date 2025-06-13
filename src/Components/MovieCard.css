@@ -82,7 +82,6 @@
   padding: 0 0.625rem;
   overflow: hidden;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   min-height: 2.5rem;
   color: white;
